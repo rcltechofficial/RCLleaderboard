@@ -1,0 +1,184 @@
+@font-face {
+    font-family: 'DiN Next W1G';
+    src: url(fonts/dinnextw1g_bold.otf);
+}
+@font-face {
+  font-family: 'Tungsten';
+  src: url(fonts/Tungsten-Bold.ttf);
+}
+body {
+  font-family: 'DiN Next W1G';
+  padding: 50px;
+  /* Page background gradient */
+  background: linear-gradient(180deg, #0c1824, #0c1824, #0c1824, #0c1824,#0c1824, #ff5152);
+  min-height: 100vh;
+  color: #fff;
+}
+.title{
+  text-align: center;
+  padding: 2%;
+  font-family: 'Tungsten';
+  font-size: 500%;
+}
+
+/* Header */
+.header {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Columns in header */
+.header-cols {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Each row */
+.row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: stretch;
+  margin: 5px 0;
+  cursor: grab;
+}
+.row:active {
+  cursor: grabbing;
+}
+
+/* Rank column */
+.rank {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px 0 0 8px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Button with gradient */
+.info-btn {
+  all: unset;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  padding: 12px;
+  border-radius: 0 8px 8px 0;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+}
+
+.info-btn:active {
+  transform: scale(0.98);
+}
+
+/* Drag visual */
+.drag-over {
+  border: 2px dashed #fff;
+}
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+.info-btn {
+  all: unset;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  padding: 12px;
+  border-radius: 0 8px 8px 0;
+  background-color: #08111a;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.1s ease;
+  --glow-color: rgba(255, 255, 255, 0.8); /* default glow color */
+}
+
+/* Glow inside */
+.info-btn::after {
+  content: "";
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, var(--glow-color), transparent 70%);
+  opacity: 0;
+  border-radius: 36%;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Glow border */
+.info-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0 8px 8px 0;
+  padding: 2px; /* border thickness */
+  background: radial-gradient(circle at var(--x) var(--y), var(--glow-color), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Show glow on hover */
+.info-btn:hover::after,
+.info-btn:hover::before {
+  opacity: 1;
+}
+
+.info-btn:active {
+  transform: scale(0.97);
+}
+
+.info-btn {
+  all: unset;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  padding: 12px;
+  border-radius: 0 8px 8px 0;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  --glow-color: rgba(255, 255, 255, 0.8);
+  
+  /* Floating illusion */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover → stronger lift */
+.info-btn:hover {
+  transform: translateY(-6px); /* lift up */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35),
+              0 0 20px var(--glow-color); /* add glow */
+}
+
+/* Click → press down */
+.info-btn:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
